@@ -151,22 +151,27 @@ def main():
                             home_dir = os.path.expanduser("~")
                             destination_dir = os.path.join(home_dir, '.ThingFinder_Things')
                             results[filename] = load_parsers_from_folder(destination_dir, contents)
-
+                            
                         filtered_results = {key: value for key, value in results.items() if value}
-                        # Create a table for the output
-                        table = Table(title="'Things' Found'")
-                        table.add_column("Location", style="bold")
-                        table.add_column("Thing", style="bold")
 
-                        console.clear()
+                        if not len(filtered_results) == 0:
 
-                        for filename, value in filtered_results.items():
-                            highlighted_filename = f"[bold green]{filename}[/bold green]"  # Highlight filename
-                            thing_names = [thing for thing, cwe_exists in value.items() if cwe_exists]  # Get CWE names
-                            thing_str = ', '.join(thing_names) if thing_names else ""  # Join CWE names
-                            table.add_row(highlighted_filename, thing_str)
-                            live.update(table)
+                            # Create a table for the output
+                            table = Table(title="'Things' Found'")
+                            table.add_column("Location", style="bold")
+                            table.add_column("Thing", style="bold")
 
+                            console.clear()
+
+                            for filename, value in filtered_results.items():
+                                highlighted_filename = f"[bold green]{filename}[/bold green]"  # Highlight filename
+                                thing_names = [thing for thing, cwe_exists in value.items() if cwe_exists]  # Get CWE names
+                                thing_str = ', '.join(thing_names) if thing_names else ""  # Join CWE names
+                                table.add_row(highlighted_filename, thing_str)
+                                live.update(table)
+                    
+        if len(filtered_results) == 0:
+            console.log("No things found...")
 
 if __name__ == "__main__":
     main()
