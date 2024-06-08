@@ -8,7 +8,7 @@ from pprint import pprint
 from rich.console import Console
 from rich.table import Table
 from rich.live import Live
-
+import json
 
 def parse_args():
     """
@@ -23,6 +23,9 @@ def parse_args():
     parser.add_argument("--reachable_from_function", metavar="FUNCTION_NAME", 
                         help="Specify a function name to review only reachable functions "
                              "(valid only if --binary is provided).", nargs='?')
+                             
+    parser.add_argument("--output", metavar="OUTPUT_FILE", help="Path to the file to save the results.")
+                             
     return parser.parse_args()
 
 
@@ -86,7 +89,7 @@ def load_parsers_from_folder(folder_path, code):
                         else:
                             raise AttributeError(f"Class {name} in {module_path} does not have a 'parse' method.")
     return results
-                       
+
 
 def main():
     """
@@ -104,7 +107,7 @@ def main():
             if not os.path.isdir(args.code):
                 raise Exception(f"The directory '{args.code}' provided is not a valid directory!")
             
-            with console.status("[bold green]Copying files to temporery folder...") as status:
+            with console.status("[bold green]Copying files to temporary folder...") as status:
                 copy_folder_contents(args.code, code_folder)
 
         elif args.binary:
@@ -172,6 +175,12 @@ def main():
                     
         if len(filtered_results) == 0:
             console.log("No things found...")
+
+        # Save the results to a file if --output is specified
+        if args.output:
+            with open(args.output, 'w') as output_file:
+                json.dump(filtered_results, output_file, indent=4)
+            console.log(f"Results saved to {args.output}")
 
 if __name__ == "__main__":
     main()
