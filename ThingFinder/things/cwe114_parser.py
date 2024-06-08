@@ -1,6 +1,8 @@
 import re
-from ingest_class import IngestClass
-
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class ProcessControlChecker(IngestClass):
 

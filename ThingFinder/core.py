@@ -128,7 +128,7 @@ def main():
 
         # Loop through all files in the folder
         results = {}
-        with Live(Table(), refresh_per_second=4, console=console) as live:
+        with Live(Table(), refresh_per_second=1, console=console) as live:
 
             for filename in os.listdir(code_folder):
                 # Construct the full path to the file
@@ -145,6 +145,12 @@ def main():
                         # Define the folder path relative to the script's location
                         folder_path = os.path.join(script_dir, "things")
                         results[filename] = load_parsers_from_folder(folder_path, contents)
+
+                        # thing files may be stored at home after install
+                        if len(results[filename]) == 0:
+                            home_dir = os.path.expanduser("~")
+                            destination_dir = os.path.join(home_dir, '.ThingFinder_Things')
+                            results[filename] = load_parsers_from_folder(destination_dir, contents)
 
                         filtered_results = {key: value for key, value in results.items() if value}
                         # Create a table for the output
