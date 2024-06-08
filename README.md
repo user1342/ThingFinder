@@ -14,7 +14,7 @@
 
 </div>
 
-ThingFinder is a python tool designed to facilitate searching and analysing code, whether it's source code or compiled binary executables. It provides a modular interface for adding new parsers for identifying new 'things' in that code, be it vulnerabilities, malware, or others patterns. 
+ThingFinder is a python tool designed to facilitate searching and analysing code, whether it's source code or compiled binary executables. It provides a modular interface for adding new parsers for identifying new 'things' in that code, be it vulnerabilities, malware, or other patterns. 
 
 
 # ⚙️ Setup
