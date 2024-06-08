@@ -37,8 +37,6 @@ python -m pip install .
 ```
 
 # 🏃 Running
-To use ThingFinder:
-
 ## For source code: 
 
 ```bash
