@@ -156,10 +156,13 @@ def main():
                             try:
                                 results[filename] = load_parsers_from_folder(destination_dir, contents)
                             except:
-                                # thing files may be stored at home after install
-                                if len(results[filename]) == 0:
-                                    folder_path = os.path.join(script_dir, "things")
-                                    results[filename] = load_parsers_from_folder(folder_path, contents)
+                                try:
+                                    # thing files may be stored at home after install
+                                    if filename not in results or len(results[filename]) == 0:
+                                        folder_path = os.path.join(script_dir, "things")
+                                        results[filename] = load_parsers_from_folder(folder_path, contents)
+                                except:
+                                    continue
                                 
                             filtered_results = {key: value for key, value in results.items() if value}
                             if not len(filtered_results) == 0:
