@@ -40,13 +40,13 @@ python -m pip install .
 ## For source code analysis
 
 ```bash
-ThingFinder --code <path-to-code-folder>
+ThingFinder --code <path-to-code-folder> [--output <output json file>]
 ```
 ## For binary analysis
 ThingFinder uses [GhidraBridge](https://github.com/user1342/GhidraBridge) to decompile the binary and uses the Ghidra CFG to identify which functions may be reachable from anouther function (allowing you to provide the ```--reachable_from_function``` argument to limit your search to such functions.
 
 ```bash
-ThingFinder --binary <path-to-binary> [--reachable_from_function <function-name>]
+ThingFinder --binary <path-to-binary> [--reachable_from_function <function-name>] [--output <output json file>]
 ```
 
 <p align="center">
