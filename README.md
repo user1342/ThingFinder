@@ -34,6 +34,29 @@ To use ThingFinder:
 - For C code: ```ThingFinder --code <path-to-code-folder>```
 - For binary: ```ThingFinder--binary <path-to-binary> [--reachable_from_function <function-name>]```
 
+# 🔨 Building 'things' parsers
+ThingFinder is modular and all 'thing' parsers present in the ```things``` folder when built will be used on target binaries and code. To write your own thing parser follow the below:
+1) Create a file in the ```things``` folder, ending in ```_parser.py```. Ensure to have a good name for the rest of the file as that will be used to identify what was found. 
+2) Create a class that inherits from the ```IngestClass``` class.
+3) Ensure your class has a ```parser``` function that takes ```self``` and ```code```.
+4) Your function should then take the code and review it for what your parser is looking for. If it's been found it should return true.
+
+An example of this can be seen below (named ```passwords_parser.py```):
+
+```python
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
+
+class SimplePasswordFinder(IngestClass):
+
+    def parser(self, code):
+        if "password" in code:
+            return True
+        else:
+            return False
+```
 
 # ⚖️ Code of Conduct
 ThingFinder follows the Contributor Covenant Code of Conduct. Please make sure to review and adhere to this code of conduct when contributing to ThingFinder.
