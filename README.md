@@ -25,6 +25,7 @@ When using ThingFinder for binary analysis it utilises [GhidraBridge](https://gi
 
 **ThingFinder has been tested on Windows 11; however, it should be compatible with Unix and other systems.**
 
+## Install
 ```
 pip install -r requirements.txt
 ```
