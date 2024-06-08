@@ -18,6 +18,13 @@ ThingFinder is a python tool designed to facilitate searching and analysing code
 
 
 # ⚙️ Setup
+
+
+## System Requirements
+When using ThingFinder for binary analysis it utilises [GhidraBridge](https://github.com/user1342/GhidraBridge) which requires [Ghidra](https://ghidra-sre.org/) to be installed and accessible. Ensure that `analyzeHeadless` is available in your environment.
+
+**ThingFinder has been tested on Windows 11; however, it should be compatible with Unix and other systems.**
+
 ```
 pip install -r requirements.txt
 ```
