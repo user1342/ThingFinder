@@ -28,11 +28,17 @@ python -m pip install .
 # 🏃 Running
 To use ThingFinder:
 
-- Provide the path to either a folder containing C code (--code) or a binary file (--binary).
-- Optionally, specify a function name to review only reachable functions (valid only if --binary is provided).
-- Run ThingFinder using the appropriate command:
-- For C code: ```ThingFinder --code <path-to-code-folder>```
-- For binary: ```ThingFinder--binary <path-to-binary> [--reachable_from_function <function-name>]```
+## For source code: 
+
+```bash
+ThingFinder --code <path-to-code-folder>
+```
+## For binary: 
+ThingFinder uses [GhidraBridge](https://github.com/user1342/GhidraBridge) to decompile the binary and uses the Ghidra CFG to identify which functions may be reachable from anouther function (allowing you to provide the ```--reachable_from_function``` argument to limit your search to such functions.
+
+```bash
+ThingFinder--binary <path-to-binary> [--reachable_from_function <function-name>]
+```
 
 # 🔨 Building 'things' parsers
 ThingFinder is modular and all 'thing' parsers present in the ```things``` folder when built will be used on target binaries and code. To write your own thing parser follow the below:
