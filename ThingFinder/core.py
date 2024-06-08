@@ -130,48 +130,54 @@ def main():
 
         # Loop through all files in the folder
         results = {}
+        filtered_results = {}
+        
         with Live(Table(), refresh_per_second=1, console=console) as live:
 
-            for filename in os.listdir(code_folder):
-                # Construct the full path to the file
-                file_path = os.path.join(code_folder, filename)
-                
-                # Check if the current item is a file (not a subfolder)
-                if os.path.isfile(file_path):
-                    # Open the file and read its contents
-                    with open(file_path, 'r') as file:
-                        contents = file.read()
-                        # Get the directory path of the current script
-                        script_dir = os.path.dirname(os.path.abspath(__file__))
+            for root, dirs, files in os.walk(code_folder):
+                for filename in files:
+                    
+                    # Construct the full path to the file
+                    file_path = os.path.join(root, filename)
+                    # Check if the current item is a file (not a subfolder)
 
-                        # Define the folder path relative to the script's location
-                        folder_path = os.path.join(script_dir, "things")
-                        results[filename] = load_parsers_from_folder(folder_path, contents)
+                    if os.path.isfile(file_path):
+                        # Open the file and read its contents
+                        with open(file_path, 'r') as file:
+                            contents = file.read()
+                            # Get the directory path of the current script
+                            script_dir = os.path.dirname(os.path.abspath(__file__))
 
-                        # thing files may be stored at home after install
-                        if len(results[filename]) == 0:
+
+                            # Define the folder path relative to the script's location
                             home_dir = os.path.expanduser("~")
                             destination_dir = os.path.join(home_dir, '.ThingFinder_Things')
-                            results[filename] = load_parsers_from_folder(destination_dir, contents)
-                            
-                        filtered_results = {key: value for key, value in results.items() if value}
 
-                        if not len(filtered_results) == 0:
+                            try:
+                                results[filename] = load_parsers_from_folder(destination_dir, contents)
+                            except:
+                                # thing files may be stored at home after install
+                                if len(results[filename]) == 0:
+                                    folder_path = os.path.join(script_dir, "things")
+                                    results[filename] = load_parsers_from_folder(folder_path, contents)
+                                
+                            filtered_results = {key: value for key, value in results.items() if value}
+                            if not len(filtered_results) == 0:
+                                
+                                # Create a table for the output
+                                table = Table(title="'Things' Found'")
+                                table.add_column("Location", style="bold")
+                                table.add_column("Thing", style="bold")
 
-                            # Create a table for the output
-                            table = Table(title="'Things' Found'")
-                            table.add_column("Location", style="bold")
-                            table.add_column("Thing", style="bold")
+                                for filename, value in filtered_results.items():
+                                    highlighted_filename = f"[bold green]{filename}[/bold green]"  # Highlight filename
+                                    thing_names = [thing for thing, cwe_exists in value.items() if cwe_exists]  # Get CWE names
+                                    thing_str = ', '.join(thing_names) if thing_names else ""  # Join CWE names
+                                    table.add_row(highlighted_filename, thing_str)
+                                    live.update(table)
 
-                            console.clear()
-
-                            for filename, value in filtered_results.items():
-                                highlighted_filename = f"[bold green]{filename}[/bold green]"  # Highlight filename
-                                thing_names = [thing for thing, cwe_exists in value.items() if cwe_exists]  # Get CWE names
-                                thing_str = ', '.join(thing_names) if thing_names else ""  # Join CWE names
-                                table.add_row(highlighted_filename, thing_str)
-                                live.update(table)
-                    
+                        
+                 
         if len(filtered_results) == 0:
             console.log("No things found...")
 
