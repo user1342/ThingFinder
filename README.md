@@ -2,7 +2,7 @@
     <img width=100% src="banner.png">
   </a>
 </p>
-<p align="center"> 🔦 Finding ‘things’ in binaries and C source 🔎 </p>
+<p align="center"> 🔦 Finding ‘things’ in binaries and source code 🔎 </p>
 
 <div align="center">
 
