@@ -49,6 +49,11 @@ ThingFinder uses [GhidraBridge](https://github.com/user1342/GhidraBridge) to dec
 ThingFinder --binary <path-to-binary> [--reachable_from_function <function-name>]
 ```
 
+<p align="center">
+    <img width=100% src="demo.gif">
+  </a>
+</p>
+
 # 🔨 Building 'things' parsers
 ThingFinder is modular, and all parsers present in the ```things``` folder when built will be used on target binaries and code when run. These parsers may be to identify vulnerabilities, interesting code elements, etc.
 
