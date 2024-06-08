@@ -58,6 +58,39 @@ class SimplePasswordFinder(IngestClass):
             return False
 ```
 
+# 📦 Example output
+The below is an example of running ThingFinder with the ```cwe122_parser.py``` parser against a portion of the [Juliet vulnerable code dataset](https://samate.nist.gov/SARD/test-suites/112).
+
+```bash
+ThingFinder.exe --code "2017-10-01-juliet-test-suite-for-c-cplusplus-v1-3\C\testcases\CWE122_Heap_Based_Buffer_Overflow\s11"
+```
+
+```
+                                'Things' Found'
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ Location                                                            ┃ Thing  ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_01.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_02.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_03.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_04.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_05.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_06.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_07.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_08.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_09.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_10.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_11.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_12.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_13.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_14.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_15.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_16.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_17.c │ CWE122 │
+│ CWE122_Heap_Based_Buffer_Overflow__wchar_t_type_overrun_memcpy_18.c │ CWE122 │
+└─────────────────────────────────────────────────────────────────────┴────────┘
+```
+
 # ⚖️ Code of Conduct
 ThingFinder follows the Contributor Covenant Code of Conduct. Please make sure to review and adhere to this code of conduct when contributing to ThingFinder.
 
