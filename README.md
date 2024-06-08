@@ -56,7 +56,7 @@ To write your own thing parser follow the below:
 1) Create a file in the ```things``` folder, ending in ```_parser.py```. Ensure to have a good name for the rest of the file as that will be used to identify what was found. 
 2) Create a class that inherits from the ```IngestClass``` class.
 3) Ensure your class has a ```parser``` function that takes ```self``` and ```code```.
-4) Your function should then take the code and review it for what your parser is looking for. If it's been found it should return true.
+4) Your function should then take the code and review it for what your parser is looking for. If it's been found it should return ```True``` else ```False```.
 
 An example of this can be seen below (named ```passwords_parser.py```):
 
