@@ -44,3 +44,6 @@ If you encounter a bug or have a suggestion for a new feature, please open an is
 # 📜 License
 
 [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/)
+
+# ⭐ Thanks
+The name and high-level idea for ThingFinder came from the tool [FlawFinder](https://github.com/david-a-wheeler/flawfinder) check it out!
