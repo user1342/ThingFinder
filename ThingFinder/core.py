@@ -4,7 +4,6 @@ import importlib.util
 import tempfile
 import shutil
 from ghidrabridge.ghidra_bridge import GhidraBridge
-from pprint import pprint
 from rich.console import Console
 from rich.table import Table
 from rich.live import Live
