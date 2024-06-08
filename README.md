@@ -41,7 +41,9 @@ ThingFinder--binary <path-to-binary> [--reachable_from_function <function-name>]
 ```
 
 # 🔨 Building 'things' parsers
-ThingFinder is modular and all 'thing' parsers present in the ```things``` folder when built will be used on target binaries and code. To write your own thing parser follow the below:
+ThingFinder is modular, and all parsers present in the ```things``` folder when built will be used on target binaries and code when run. These parsers may be to identify vulnerabilities, interesting code elements, etc.
+
+To write your own thing parser follow the below:
 1) Create a file in the ```things``` folder, ending in ```_parser.py```. Ensure to have a good name for the rest of the file as that will be used to identify what was found. 
 2) Create a class that inherits from the ```IngestClass``` class.
 3) Ensure your class has a ```parser``` function that takes ```self``` and ```code```.
