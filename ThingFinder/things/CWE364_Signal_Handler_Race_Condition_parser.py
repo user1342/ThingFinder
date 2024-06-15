@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to detect CWE364_Signal_Handler_Race_Condition vulnerabilities in C code. The parser uses string parsing, regex, and other Python techniques to identify the vulnerabilities.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE364Parser(IngestClass):
 
@@ -26,8 +27,3 @@ class CWE364Parser(IngestClass):
 
         # If no vulnerable signal handler functions are found, return False
         return False
-```
-
-This code defines a `CWE364Parser` class that inherits from the `IngestClass`. The `parser` method in this class searches for signal calls in the provided C code and checks if the signal handler function name matches a pattern for a vulnerable function. If a vulnerable function is found, the method returns `True` to indicate a vulnerability. Otherwise, it returns `False`.
-
-The pattern used to identify vulnerable signal handler functions is a simple one that matches any function name ending with `_handler`. This pattern may not cover all possible cases, but it should catch many common examples of CWE364 vulnerabilities. You may want to refine or expand this pattern to better detect the vulnerabilities in varying C code examples.

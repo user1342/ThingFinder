@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to detect CWE194_Unexpected_Sign_Extension vulnerabilities in C code. The parser uses string parsing, regex, and other Python techniques to identify the vulnerability.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE194Parser(IngestClass):
 
@@ -28,6 +29,3 @@ class CWE194Parser(IngestClass):
 
         # Return the result
         return vulnerability_found
-```
-
-This code will return `True` if the C code contains an instance of `strncpy` or `memcpy` with a negative length variable, and `False` otherwise. The code tries to be as generic as possible to detect the vulnerability in varying C code examples.

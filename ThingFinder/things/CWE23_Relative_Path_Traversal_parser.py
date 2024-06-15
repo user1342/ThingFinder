@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to detect CWE23_Relative_Path_Traversal vulnerabilities in C code. The parser uses string parsing, regex, and other Python techniques to identify the vulnerability.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 import os
 
 class CWE23RelativePathTraversalParser(IngestClass):
@@ -30,6 +31,3 @@ class CWE23RelativePathTraversalParser(IngestClass):
 
         # If no vulnerable code is found, return False
         return False
-```
-
-This code defines a `CWE23RelativePathTraversalParser` class that overrides the `parser` method of the `IngestClass`. The parser first finds the base path and socket function lines in the provided C code. Then, it checks if any socket function arguments contain a variable that starts with the base path. If so, it returns True, indicating the presence of the CWE23_Relative_Path_Traversal vulnerability. Otherwise, it returns False.

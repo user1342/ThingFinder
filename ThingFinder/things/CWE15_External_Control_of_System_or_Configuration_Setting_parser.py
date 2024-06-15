@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to detect CWE15_External_Control_of_System_or_Configuration_Setting vulnerabilities in C code. The class uses string parsing, regex, and other Python techniques to identify the vulnerability.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE15Parser(IngestClass):
 
@@ -20,6 +21,3 @@ class CWE15Parser(IngestClass):
 
         # If there are no matches, return False
         return False
-```
-
-This code defines a regular expression pattern for socket calls and set_hostname calls. It then searches the provided C code for these patterns and returns True if both a socket call and a set_hostname call are found, indicating the presence of the CWE15 vulnerability. If no matches are found, it returns False, indicating that the vulnerability is not present.

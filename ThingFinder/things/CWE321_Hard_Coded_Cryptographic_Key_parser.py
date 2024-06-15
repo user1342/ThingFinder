@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to detect CWE321_Hard_Coded_Cryptographic_Key vulnerabilities in C code. The class uses string parsing, regex, and other Python techniques to identify the vulnerability.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE321_Hard_Coded_Cryptographic_KeyParser(IngestClass):
 
@@ -25,6 +26,3 @@ class CWE321_Hard_Coded_Cryptographic_KeyParser(IngestClass):
                         return True
 
         return False
-```
-
-This code defines a regular expression pattern to match the assignment of a variable to a hard-coded string, and another pattern to match the use of that variable in a hash or encryption operation. If both patterns are found, the function returns True, indicating the presence of the CWE321_Hard_Coded_Cryptographic_Key vulnerability. Otherwise, it returns False.

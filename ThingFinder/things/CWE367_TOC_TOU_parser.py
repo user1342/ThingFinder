@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser function to detect CWE367_TOC_TOU vulnerabilities in C code. The parser function uses string parsing, regex, and other techniques available in Python to identify the vulnerabilities.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE367_TOC_TOU_IngestClass(IngestClass):
 
@@ -22,6 +23,3 @@ class CWE367_TOC_TOU_IngestClass(IngestClass):
 
         # Return the result
         return result
-```
-
-This code defines a class `CWE367_TOC_TOU_IngestClass` that inherits from the `IngestClass`. The `parser` function in this class searches for function calls that might be vulnerable to CWE367_TOC_TOU and checks if they are bad functions. If a vulnerable function is found, the function returns `True`, otherwise it returns `False`.

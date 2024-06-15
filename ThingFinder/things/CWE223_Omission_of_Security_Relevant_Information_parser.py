@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements the `parser` function to detect CWE223_Omission_of_Security_Relevant_Information vulnerabilities in C code. The function uses string parsing, regex, and other Python techniques to identify the vulnerabilities.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE223Parser(IngestClass):
 
@@ -25,6 +26,3 @@ class CWE223Parser(IngestClass):
         # If there are no bad function calls but good function calls are missing, return True (potential vulnerability)
         if not bad_calls and not good_calls:
             return True
-```
-
-This code focuses on detecting the vulnerabilities in a generic way by looking for the presence of good and bad function calls. If there are any bad function calls or no good function calls but bad function calls are present, the function returns True. If there are no bad function calls but good function calls are missing, the function also returns True, indicating a potential vulnerability.

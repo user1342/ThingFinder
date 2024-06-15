@@ -1,7 +1,8 @@
-Here is the Python code that inherits from the `IngestClass` and implements the `parser` function to detect CWE325_Missing_Required_Cryptographic_Step vulnerabilities in C code. The function uses string parsing, regex, and other Python techniques to identify the vulnerabilities.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE325Parser(IngestClass):
 
@@ -17,6 +18,3 @@ class CWE325Parser(IngestClass):
             result = True
 
         return result
-```
-
-This code defines a new class `CWE325Parser` that inherits from the `IngestClass`. The `parser` function searches for the function calls related to CWE325_Missing_Required_Cryptographic_Step in the provided C code. If any of these function calls are found, the function returns `True`, indicating the presence of the vulnerability. Otherwise, it returns `False`.

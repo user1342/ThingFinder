@@ -1,7 +1,8 @@
-Here is the Python class that inherits from the `IngestClass` and implements the `parser` function to detect CWE366_Race_Condition_Within_Thread vulnerabilities in C code. The function uses string parsing, regex, and other Python techniques to identify the vulnerability.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE366Parser(IngestClass):
 
@@ -23,6 +24,3 @@ class CWE366Parser(IngestClass):
 
         # Return the result as a boolean value
         return vulnerability_found
-```
-
-This code checks if the C code includes the `srand()` function call with the `time()` function call as an argument, and if the `globalArgc` and `globalArgv` variables are assigned the `argc` and `argv` values, respectively. If these conditions are met, the function returns `True`, indicating the presence of the CWE366_Race_Condition_Within_Thread vulnerability. Otherwise, it returns `False`.

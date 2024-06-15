@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements the `parser` function to detect CWE226_Sensitive_Information_Uncleared_Before_Release vulnerabilities in C code. The function uses string parsing, regex, and other techniques available in Python to do this.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE226Parser(IngestClass):
 
@@ -29,6 +30,3 @@ class CWE226Parser(IngestClass):
 
         # Return the result
         return result
-```
-
-This code uses regular expressions to find potential `alloca` calls and checks if the arguments passed to `alloca` contain sensitive information such as passwords, credit card numbers, email addresses, etc. If sensitive information is found, the function returns `True`, indicating the presence of the CWE226 vulnerability. Otherwise, it returns `False`.

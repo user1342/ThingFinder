@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to detect CWE122_Heap_Based_Buffer_Overflow vulnerabilities in C code. The parser uses string parsing, regex, and other Python techniques to identify the vulnerability.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE122Detector(IngestClass):
 
@@ -48,6 +49,3 @@ class CWE122Detector(IngestClass):
             'TwoIntsClass': 8  # Assuming a TwoIntsClass size of 8 bytes
         }
         return data_type_sizes.get(data_type, 8)  # Return 8 bytes as a default size if the data type is not found
-```
-
-This code defines a `CWE122Detector` class that inherits from `IngestClass`. The `parser` method checks for the presence of `malloc` and `new` with placement in the provided C code. If a buffer size is found and it's less than the size of the corresponding data type, the method returns `True`, indicating a potential CWE122_Heap_Based_Buffer_Overflow vulnerability.

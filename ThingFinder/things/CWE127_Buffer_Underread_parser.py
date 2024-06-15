@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to identify CWE127_Buffer_Underread vulnerabilities in C code. The parser uses string parsing, regex, and other Python techniques to detect the vulnerability.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE127Parser(IngestClass):
 
@@ -48,6 +49,3 @@ class CWE127Parser(IngestClass):
             return True
 
         return False
-```
-
-This code first finds all function declarations in the provided C code. For each function, it finds all occurrences of the function call in the code. If the function call uses `memmove` or `memcpy`, it checks the arguments passed to the function. If any of the arguments are pointers or arrays, it checks if any of the arguments are used before the allocated memory buffer. If a function is found to have a vulnerable argument, the parser returns `True`, indicating the presence of the CWE127_Buffer_Underread vulnerability. Otherwise, it returns `False`.

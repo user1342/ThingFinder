@@ -1,8 +1,9 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to detect CWE176_Improper_Handling_of_Unicode_Encoding vulnerabilities in C code. The class uses string parsing, regex, and other Python techniques to identify the vulnerabilities.
-
-```python
 import re
-
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
+   
 class CWE176Parser(IngestClass):
 
     def __init__(self):
@@ -28,6 +29,3 @@ class CWE176Parser(IngestClass):
                 return True
 
         return False
-```
-
-This class uses regular expressions to find relevant patterns in the C code, such as the use of `wchar_t`, `wcscpy`, and `WideCharToMultiByte`. It then checks if the Unicode strings are too long or if the destination buffer size is not checked before conversion. If either of these conditions is met, the function returns `True`, indicating that the CWE176 vulnerability is present. Otherwise, it returns `False`.

@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements the `parser` function to detect CWE327_Use_Broken_Crypto vulnerabilities in C code. The function uses string parsing, regex, and other Python techniques to identify the vulnerabilities.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE327Parser(IngestClass):
 
@@ -22,6 +23,3 @@ class CWE327Parser(IngestClass):
             result = True
 
         return result
-```
-
-This code defines a class `CWE327Parser` that inherits from the `IngestClass`. The `parser` function searches for function calls related to broken cryptography using regular expressions. If any matches are found, the function returns `True`, indicating that the CWE327_Use_Broken_Crypto vulnerability is present. Otherwise, it returns `False`.

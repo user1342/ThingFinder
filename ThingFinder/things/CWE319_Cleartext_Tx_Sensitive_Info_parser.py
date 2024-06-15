@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser function to detect CWE319_Cleartext_Tx_Sensitive_Info vulnerabilities in C code. The parser function uses string parsing, regex, and other Python techniques to identify potential vulnerabilities.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE319Parser(IngestClass):
 
@@ -25,6 +26,3 @@ class CWE319Parser(IngestClass):
 
         # If no matches are found, return False
         return False
-```
-
-This code will return `True` if the CWE319_Cleartext_Tx_Sensitive_Info vulnerability is present in the provided C code and `False` otherwise.

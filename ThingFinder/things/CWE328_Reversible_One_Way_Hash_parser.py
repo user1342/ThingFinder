@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser function to detect CWE328_Reversible_One_Way_Hash vulnerabilities in C code. The parser function uses string parsing, regex, and other techniques available in Python to identify the vulnerabilities.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE328Parser(IngestClass):
 
@@ -19,6 +20,3 @@ class CWE328Parser(IngestClass):
 
         # If no vulnerable function calls are found, return False
         return False
-```
-
-This code works by first defining a set of hashing functions we are looking for. Then, it uses regex to find function calls in the code. If a function call matches one of the hashing functions, the function returns True, indicating the presence of the CWE328_Reversible_One_Way_Hash vulnerability. If no vulnerable function calls are found, the function returns False.

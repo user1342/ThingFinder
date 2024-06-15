@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to detect CWE195_Signed_to_Unsigned_Conversion_Error vulnerabilities in C code. The class uses string parsing, regex, and other Python techniques to identify the vulnerabilities.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE195Parser(IngestClass):
 
@@ -49,6 +50,3 @@ class CWE195Parser(IngestClass):
                 return True
 
         return False
-```
-
-This code will return `True` if it finds a potential CWE195_Signed_to_Unsigned_Conversion_Error vulnerability in the provided C code, and `False` otherwise. The code searches for the occurrences of malloc, calloc, realloc, strncpy, memcpy, memmove, and memset functions, and checks if there is a negative number involved in the malloc, calloc, or realloc function. If both conditions are met, it returns `True`, indicating a potential vulnerability.
