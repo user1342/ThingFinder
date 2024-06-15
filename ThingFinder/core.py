@@ -24,7 +24,8 @@ def parse_args():
                              "(valid only if --binary is provided).", nargs='?')
                              
     parser.add_argument("--output", metavar="OUTPUT_FILE", help="Path to the file to save the results.")
-                             
+    parser.add_argument("--thing_folder", metavar="PARSER_FOLDER", help="Path to folder container thing finder parser classes. Overides other parser folders.")
+              
     return parser.parse_args()
 
 
@@ -89,36 +90,31 @@ def load_parsers_from_folder(folder_path, code):
                             raise AttributeError(f"Class {name} in {module_path} does not have a 'parse' method.")
     return results
 
-
-def main():
-    """
-    Main function to execute the program.
-    """
-    args = parse_args()
+def run(code, binary, output=None, reachable_from_function=None, thing_folder=None):
     console = Console()
 
 
     with tempfile.TemporaryDirectory() as code_folder:
 
-        if args.code:
-            if args.reachable_from_function:
+        if code:
+            if reachable_from_function:
                 print("'--reachable_from_function' only supported with '--binary'")
-            if not os.path.isdir(args.code):
-                raise Exception(f"The directory '{args.code}' provided is not a valid directory!")
+            if not os.path.isdir(code):
+                raise Exception(f"The directory '{code}' provided is not a valid directory!")
             
             with console.status("[bold green]Copying files to temporary folder...") as status:
-                copy_folder_contents(args.code, code_folder)
+                copy_folder_contents(code, code_folder)
 
-        elif args.binary:
+        elif binary:
             with console.status("[bold green]Decompiling binary...") as status:
                 bridge = GhidraBridge()
-                bridge.decompile_binaries_functions(args.binary, code_folder)
+                bridge.decompile_binaries_functions(binary, code_folder)
 
-            if args.reachable_from_function:
+            if reachable_from_function:
                 with console.status("[bold green]Retrieving reachable functions...") as status:
-                    reachable_functions = bridge.get_list_of_reachable_functions(args.binary, args.reachable_from_function)
+                    reachable_functions = bridge.get_list_of_reachable_functions(binary, reachable_from_function)
                 
-                reachable_functions = reachable_functions + [args.reachable_from_function]
+                reachable_functions = reachable_functions + [reachable_from_function]
 
                 # Loop through files in the directory
                 for filename in os.listdir(code_folder):
@@ -153,16 +149,23 @@ def main():
                             home_dir = os.path.expanduser("~")
                             destination_dir = os.path.join(home_dir, '.ThingFinder_Things')
 
-                            try:
-                                results[filename] = load_parsers_from_folder(destination_dir, contents)
-                            except:
+                            if thing_folder:
+                                if os.path.exists(thing_folder):
+                                    results[filename] = load_parsers_from_folder(thing_folder, contents)
+                                else:
+                                    raise Exception(f"Thing folder {thing_folder} provided, however, it does not exist.")
+                            else:
+
                                 try:
-                                    # thing files may be stored at home after install
-                                    if filename not in results or len(results[filename]) == 0:
-                                        folder_path = os.path.join(script_dir, "things")
-                                        results[filename] = load_parsers_from_folder(folder_path, contents)
+                                    results[filename] = load_parsers_from_folder(destination_dir, contents)
                                 except:
-                                    continue
+                                    try:
+                                        # thing files may be stored at home after install
+                                        if filename not in results or len(results[filename]) == 0:
+                                            folder_path = os.path.join(script_dir, "things")
+                                            results[filename] = load_parsers_from_folder(folder_path, contents)
+                                    except:
+                                        continue
                                 
                             filtered_results = {key: value for key, value in results.items() if value}
                             if not len(filtered_results) == 0:
@@ -185,10 +188,39 @@ def main():
             console.log("No things found...")
 
         # Save the results to a file if --output is specified
-        if args.output:
-            with open(args.output, 'w') as output_file:
+        if output:
+            with open(output, 'w') as output_file:
                 json.dump(filtered_results, output_file, indent=4)
-            console.log(f"Results saved to {args.output}")
+            console.log(f"Results saved to {output}")
+
+def main():
+    """
+    Main function to execute the program.
+    """
+    args = parse_args()
+
+    output = None
+    if args.output:
+        output = args.output
+
+    reachable_from_function = None
+    if args.reachable_from_function:
+        reachable_from_function = args.reachable_from_function
+
+    code = None
+    if args.code:
+        code = args.code
+
+    binary = None
+    if args.binary:
+        binary = args.binary
+
+
+    thing_folder = None
+    if args.thing_folder:
+        thing_folder = args.thing_folder
+    
+    run(code, binary, output, reachable_from_function, thing_folder)
 
 if __name__ == "__main__":
     main()
