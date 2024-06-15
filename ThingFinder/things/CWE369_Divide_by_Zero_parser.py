@@ -1,7 +1,8 @@
-Here is a Python class that inherits from the `IngestClass` and implements a parser to detect CWE369_Divide_by_Zero vulnerabilities in C code. The class uses string parsing, regex, and other Python techniques to identify potential divide-by-zero errors.
-
-```python
 import re
+try:
+    from ThingFinder.ingest_class import IngestClass
+except:
+   from ingest_class import IngestClass 
 
 class CWE369_DivideByZeroParser(IngestClass):
 
@@ -20,6 +21,3 @@ class CWE369_DivideByZeroParser(IngestClass):
                 return True
 
         return False
-```
-
-This class will return `True` if it finds a division operation with a divisor equal to zero, and `False` otherwise. The `parser` function searches for division operations using a regular expression and checks if the divisor is zero.
