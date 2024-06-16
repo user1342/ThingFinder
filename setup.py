@@ -52,7 +52,7 @@ class CustomInstall(DistutilsInstall):
 
 setup(
     name='ThingFinder',
-    version='1.0.1',
+    version='1.0.2',
     packages=find_packages(),
     entry_points={
         'console_scripts': [
