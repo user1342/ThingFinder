@@ -193,7 +193,7 @@ def run(code, binary, output=None, reachable_from_function=None, thing_folder=No
                 json.dump(filtered_results, output_file, indent=4)
             console.log(f"Results saved to {output}")
 
-    return output
+    return filtered_results
 
 def main():
     """
